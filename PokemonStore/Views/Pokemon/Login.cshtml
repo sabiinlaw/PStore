@@ -1,0 +1,109 @@
+﻿@{
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<script type="text/javascript">
+    window.addEventListener("load", init, false)
+    var password;
+    function init() {
+        for (var i = 0; i < document.forms.length; i++) {
+            var form = document.forms[i];
+            var checkForm = false;
+            for (var j = 0; j < form.elements.length; j++) {
+                var e = form.elements[j];
+                if (e.type == "text" || e.type == "password") {
+                    var pattern = e.getAttribute("data-val")
+                    if (pattern) {
+                        e.onchange = CheckInput;
+                        checkForm = true;
+                    }
+                    if (checkForm) {
+                        form.onsubmit = CheckForm;
+                    }
+                }
+
+            }
+        }
+    }
+    function CheckInput() {
+        var pattern = this.dataset.val,
+            value = this.value;
+        var res = value.search(pattern)
+        if (res == -1 || value.length == 0) {
+            this.className = "invalid";
+        }
+        else {
+            this.className = "valid";
+        }
+
+    }
+    function CheckForm() {
+        var invalid = false;
+        for (var i = 0; i < this.elements.length; ++i) {
+            var e = this.elements[i];
+            if (e.type == "text" && e.onchange != null || e.type == "password" && e.onchange != null) {
+                e.onchange();
+                if (e.className == "invalid") {
+                    invalid = true;
+                }
+            }
+        }
+        if (invalid) {
+            return false;
+        }
+
+    }
+ </script>
+ <style type="text/css">
+        input.invalid {
+            background-color:orangered
+        }
+        input.valid {
+            background-color:lawngreen
+        }
+         
+          .field {clear:both; text-align:left; padding-right:5px; line-height:25px;}
+          .main { text-align: center}
+          .info {clear: both; text-align:left; padding-right: 5px; line-height: 25px; }
+    
+    </style>
+<div id="superMain" class="container_log">
+@using (Html.BeginForm("Login_Check","Pokemon"))
+{    
+   
+      <div class="form-input">
+       <input name="login" type="text" id="log" data-val="\S"  placeholder ="Your login"/>
+      </div>
+      <div class="form-input">
+        <input name="password" type="password" id="pass" data-val="\S" placeholder="Your password" />
+     </div>
+     <div>
+          <div class="check-input">
+         <input  name="keep" type="checkbox" value="Keep me logged"/><label>Keep me logged</label>
+          </div>
+         <input  class="btn-login" name="send" type="submit" id="send" value="Log in"/>
+        
+      </div>
+    
+
+}
+    <div class="regIn">
+       @using (Html.BeginForm("Registration","Pokemon"))
+          {
+            <p>
+                 If you don't have your own account please register
+            </p>
+          <input  class="btn-login"  name="registration" type="submit" id="registartion" value="Reg In"/>
+          }
+          
+       <p>
+   
+           @Html.ActionLink("Back", "List","Pokemon")
+        </p>
+       </div>
+     
+   </div>

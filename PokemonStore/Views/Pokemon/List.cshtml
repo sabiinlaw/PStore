@@ -1,0 +1,13 @@
+﻿@model PokemonStore.Models.PokemonListViewModel
+@using PokemonStore.HtmlHelpers
+@{
+    ViewBag.Title = "Pokemons";
+}
+
+@foreach (var p in Model.Pokemons)
+{
+    Html.RenderPartial("PokemonSummary", p);
+}
+<div class="pager">
+    @Html.PageLinks(Model.PagingInfo, x=>Url.Action("List", new {page=x}))
+</div>

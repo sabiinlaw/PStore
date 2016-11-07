@@ -1,0 +1,12 @@
+﻿@model IEnumerable<PokemonStore.Models.News>
+@{
+    ViewBag.Title = "News";
+}
+
+<h2>News</h2>
+<div>
+    @foreach (var item in Model)
+    {
+        <p class="news">@item.Date  @item.UserName  has already ordered  @item.Count  pokemon(s)</p>
+    }
+</div>

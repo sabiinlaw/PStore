@@ -1,0 +1,53 @@
+﻿@model PokemonStore.Domain.Entities.OrderContainer
+@{
+    ViewBag.Title = "OrderForm";
+}
+
+<h3>@ViewBag.info</h3>
+
+@using (Html.BeginForm("Checkout","Order"))
+{
+         @Html.HiddenFor(p=>p.Pokemon_for_Order.PokemonID)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Pokemon_for_Order.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Pokemon_for_Order.Name)
+            @Html.ValidationMessageFor(model => model.Pokemon_for_Order.Name)
+        </div>
+    <h3>Ship to</h3>
+       <div class="editor-label">
+            @Html.LabelFor(model => model.User_for_Order.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.User_for_Order.Name)
+            @Html.ValidationMessageFor(model => model.User_for_Order.Name)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.User_for_Order.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.User_for_Order.Email)
+            @Html.ValidationMessageFor(model => model.User_for_Order.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.User_for_Order.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.User_for_Order.Phone)
+            @Html.ValidationMessageFor(model => model.User_for_Order.Phone)
+        </div>
+       
+    
+    
+    <p >
+        <input class="actionButtons" type ="submit" value="Complete order"/>
+    </p>
+}
+
+<p>
+   
+    @Html.ActionLink("Back to List", "List","Pokemon")
+</p>
+

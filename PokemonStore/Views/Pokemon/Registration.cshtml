@@ -1,0 +1,126 @@
+﻿@{
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+@{
+    ViewBag.Title = "Registration";
+}
+
+<script type="text/javascript">
+       window.addEventListener("load", init, false)
+       var password;
+function init() {
+	for (var i = 0; i < document.forms.length; i++) {
+		var form = document.forms[i];
+		var checkForm = false;
+		for (var j = 0; j < form.elements.length; j++) {
+			var e = form.elements[j];
+			if (e.type == "text" || e.type == "password") {
+				var pattern = e.getAttribute("data-val")
+				if (pattern) {
+					e.onchange = CheckInput;
+					checkForm = true;
+				}
+				if (checkForm) {
+					form.onsubmit = CheckForm;
+				}
+			}
+			if (e.type == "password") {
+				e.onchange = CheckPasswords;
+			}
+
+
+		}
+	}
+}
+function CheckPasswords() {
+	var confirm
+	var pattern = this.dataset.val,
+	  msg = this.dataset.valMsg,
+	  value = this.value;
+	var res = value.search(pattern)
+	if (res == -1 || value.length == 0) {
+
+		this.className = "invalid";
+	}
+	else {
+
+		this.className = "valid";
+	}
+	if (this.getAttribute("name") == "Password") {
+		password = value;
+	}
+	else {
+		confirm = value;
+	}
+	if (confirm) {
+	    if (confirm != password) {
+	        document.getElementById("retypePassword").value = "";
+		    document.getElementById("retypePassword").placeholder = "Passwords are not equal";
+			this.className = "invalid";
+		}
+		else {
+		   
+			this.className = "valid";
+		}
+	}
+}
+function CheckInput() {
+	var pattern = this.dataset.val,
+		value = this.value;
+	var res = value.search(pattern)
+	if (res == -1 || value.length == 0) {
+		this.className = "invalid";
+	}
+	else {
+		this.className = "valid";
+	}
+
+}
+function CheckForm() {
+	var invalid = false;
+	for (var i = 0; i < this.elements.length; ++i) {
+		var e = this.elements[i];
+		if (e.type == "text" && e.onchange != null || e.type == "password" && e.onchange != null) {
+			e.onchange();
+			if (e.className == "invalid") {
+				invalid = true;
+			}
+		}
+	}
+	if (invalid) {
+		return false;
+	}
+}
+</script>
+ <style type="text/css">
+        input.invalid {
+            background-color:orangered
+        }
+        input.valid {
+            background-color:lawngreen
+        }
+         
+          .field {clear:both; text-align:left; padding-right:5px; line-height:25px;}
+          .main { text-align: center; width:auto;}
+          .span {float:left}
+    
+    </style>
+
+@using (Html.BeginForm("Registration_Check","Pokemon"))
+{   
+     <div id="superMain" class="container_reg">
+     
+        <div class="form-input"><input type="text" name="Name" data-val="\S"  placeholder="Enter your name"/><br /></div>
+        <div class="form-input"><input type="text" name="Login" data-val="\S" placeholder="Enter your login"/><br /></div>
+        <div class="form-input"><input type="password" name="Password" data-val="\S" placeholder="Enter your password" /><br /></div>
+        <div class="form-input"><input  id="retypePassword" type="password" name="Confirm" data-val="\S" placeholder="Retype your password" data-val-msg-id="confirmMsg"/><br /></div>
+        <div class="form-input"><input type="text" name="Email" data-val="\b[A-Za-z0-9._]+@@[a-z0-9.-]+\.[a-z]{2,4}\b"  placeholder="Enter your email"/><br /></div>
+        <div class="form-input"><input type="text" name="Phone" data-val="[0-9]"  placeholder="Enter your phone"/><br /></div>
+        <div><input class="btn-login" type="submit" name="Send" value="Send" /></div>
+        <p>
+         @Html.ActionLink("Back","List", "Pokemon")
+        </p>
+      </div>
+}
+
+

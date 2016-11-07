@@ -1,0 +1,117 @@
+﻿@model PokemonStore.Domain.Entities.AdminContainer
+
+@{
+    Layout = null;
+}
+@{
+    ViewBag.Title = "AdminIndex";
+}
+
+ <script type="text/javascript">
+     window.onload = function () {
+     
+         var _hspan = document.getElementById("messageDelete");
+         if (_hspan!=null) {
+             var s = _hspan.innerText;
+             _hspan.innerText = "";
+             alert(s);
+          }
+         
+     }
+  
+ </script> 
+
+@if (ViewBag.damageMessage != null)
+{
+    <span hidden id="messageDelete">@ViewBag.damageMessage</span>
+}
+<div style="float:right">
+ @using (Html.BeginForm("AdminLogout","Admin"))
+ {    
+     @Html.ActionLink("Store", "List", "Pokemon") <input class ="actionButtons"  name="logout" type="submit" id="logout" value="Log Out"/>
+ }
+ </div>
+<h2>Admin</h2>
+
+   <fieldset>
+      
+        <legend>Products</legend>
+           <div style="height:300px; overflow:scroll">
+                <table class="Grid">
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>       
+             
+                    </tr>
+                    @foreach (var item in Model.Pokemons_for_Admin)
+                    {
+                        <tr>
+                            <td>@if (item.ImageData != null)
+                                {
+                                 <div style ="float: left;margin-right:20px">
+                                 <img width ="90" height="90" src="@Url.Action("GetImage", "Pokemon", new {item.PokemonID})" />
+                                 </div> 
+                                }
+                    
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                            <td>@using (Html.BeginForm("AdminEdit","Admin")){
+                                       @Html.Hidden("pokemonID",item.PokemonID)
+                                       <input class ="actionButtons" type="submit" value="Edit" />
+                                   }</td> 
+                             <td>
+                                   @using (Html.BeginForm("AdminDelete","Admin")){
+                                       @Html.Hidden("pokemonID",item.PokemonID)
+                                       <input class ="actionButtons" type="submit" value="Delete" />
+                                   }
+                               </td> 
+                        </tr>
+                    }
+
+                </table>
+                  </div>
+   
+<br />
+@using (Html.BeginForm("CreatePokemon","Admin")){
+                            <input class ="actionButtons" type="submit" value="new pokemon"/>
+                   }
+        
+           </fieldset>
+<br />
+
+<fieldset>
+        <legend>Orders</legend>
+       <div style="height:400px; overflow:scroll">
+                <table class="Grid">
+                    <tr>
+                        <th>User</th>
+                        <th>Product</th>       
+                        <th>Count</th>
+                        <th>Date</th>
+                                              
+                    </tr>
+                    @foreach (var item in Model.Orders_for_Admin)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Users.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Pokemons.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Count)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                            <td>
+                                   @using (Html.BeginForm("AdminDelete","Admin")){
+                                       @Html.Hidden("orderID",item.OrderID)
+                                       <input class ="actionButtons" type="submit" value="Delete" />
+                                   }
+                               </td>
+                        </tr>
+                    }
+                </table>       
+           </div>
+<br />
+
+              
+       </fieldset>

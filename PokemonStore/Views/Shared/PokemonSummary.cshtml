@@ -1,0 +1,19 @@
+﻿@model PokemonStore.Domain.Entities.Pokemons
+
+<div class ="item">
+    @if (Model.ImageData != null)
+                {
+                    <div style ="float: left;margin-right:20px">
+                        <img width ="90" height="90" src="@Url.Action("GetImage", "Pokemon", new {Model.PokemonID})" />
+                    </div> 
+                }
+                    
+    <h2>@Model.Name<br /></h2>
+    @Model.Description<br />
+    @using (Html.BeginForm("Buy","Order")){
+        @Html.HiddenFor(x=>x.PokemonID)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input type ="submit" value="Buy" />
+    }
+   @Model.Price.ToString("c")
+ </div>
