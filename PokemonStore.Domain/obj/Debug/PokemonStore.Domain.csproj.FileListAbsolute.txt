@@ -1,0 +1,7 @@
+E:\oleg\apps\PokemonStore\PokemonStore.Domain\bin\Debug\PokemonStore.Domain.dll.config
+E:\oleg\apps\PokemonStore\PokemonStore.Domain\bin\Debug\PokemonStore.Domain.dll
+E:\oleg\apps\PokemonStore\PokemonStore.Domain\bin\Debug\PokemonStore.Domain.pdb
+E:\oleg\apps\PokemonStore\PokemonStore.Domain\bin\Debug\EntityFramework.dll
+E:\oleg\apps\PokemonStore\PokemonStore.Domain\bin\Debug\EntityFramework.xml
+E:\oleg\apps\PokemonStore\PokemonStore.Domain\obj\Debug\PokemonStore.Domain.dll
+E:\oleg\apps\PokemonStore\PokemonStore.Domain\obj\Debug\PokemonStore.Domain.pdb
