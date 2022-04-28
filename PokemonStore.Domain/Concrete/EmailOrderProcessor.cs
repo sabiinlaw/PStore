@@ -16,11 +16,11 @@ namespace PokemonStore.Domain.Concrete
        public void ProcessOrder(OrderContainer container)
        {
            string MailToAddress = container.User_for_Order.Email;
-           string MailFromAddress = "Schwaini@rambler.ru";
+           string MailFromAddress = "Schwaini89@gmail.com";
            bool UseSsl = false;
-           string Username = "Schwaini@rambler.ru";
-           string Password = "K0rneev";
-           string ServerName = "mail.rambler.ru";
+           string Username = "Schwaini89@gmail.co";
+           string Password = "Turk1sh202!";
+           string ServerName = "gmauil.com";
            int ServerPort = 587;
            using (var smtpClient = new SmtpClient())
            {

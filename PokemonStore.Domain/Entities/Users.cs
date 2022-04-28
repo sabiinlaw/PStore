@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.Mvc;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PokemonStore.Domain.Entities
 {
    public class Users
     {
         [Key]
-        [HiddenInput(DisplayValue = false)]
         public int UserID { get; set; }
         [Required(ErrorMessage = "Please enter your name")]
         [DataType(DataType.Text)]
